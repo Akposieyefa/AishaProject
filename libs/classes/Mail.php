@@ -18,11 +18,11 @@ class Mail
 		$mail->SMTPAuth   = true;
 		$mail->From     = "NILE";
 
-		$mail->Username   = 'orutu1@gmail.com';
-		$mail->Password   = 'Techshark3@gmail.com';
+		$mail->Username   = '';
+		$mail->Password   = '';
 
-		$mail->SetFrom("orutu1@gmail.com");
-		$mail->AddReplyTo('no-reply@aisha@gmail.com','no-reply');
+		$mail->SetFrom("");
+		$mail->AddReplyTo('no-reply@','no-reply');
 		$mail->Subject    = $ary2;
 
 		$mail->MsgHTML("
