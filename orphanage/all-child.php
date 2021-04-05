@@ -26,66 +26,13 @@
     <main role="main">
         <div class="container">
         <div class="row">
-        <div class="col-md-7 offset-md-3 col-sm-12">
-					
-          <a href="imagesFolder/twetter.jpg">
+        <div class="col-md-7 offset-md-3 col-sm-12">			
+            <a href="imagesFolder/twetter.jpg">
               <img class="rounded-circle mx-auto d-block mb-4 " src="../layouts/img/logo.jpg" alt="../layouts/img/logo.jpg" width="75px" height="75px" id="loginLog">
             </a>
-					<h3 class="text-center"><em>Orphanage Profile</em></h3>
-				<table class="table table-sm table-boarderd">
-					<tr>
-						<td>
-							<p>	<strong> Name :</strong></p>
-						</td>
-						<td>
-							<?php echo($_SESSION['user'][1]);?>
-						</td>
-					</tr>
-          <tr>
-						<td>
-							<p>	<strong> Email:</strong></p>
-						</td>
-						<td>
-							<?php echo($_SESSION['user'][2]);?>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<p>	<strong> Phone :</strong></p>
-						</td>
-						<td>
-						<?php echo strtoupper(($_SESSION['user'][3]));?>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<p>	<strong>Address : </strong></p>
-						</td>
-						<td>
-						<?php echo strtolower(($_SESSION['user'][4]));?>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<p>	<strong>Date: </strong></p>
-						</td>
-						<td>
-						<?php echo strtolower(($_SESSION['user'][6]));?>
-						</td>
-					</tr>
-					<tr>
-					</tr>
-          <tr>
-						<td>
+	     <h3 class="text-center"><em>Orphanage Profile</em></h3>
 
-						</td>
-						<td>
-              <br/>
-						     	<button class="btn btn-sm btn-success" type="submit" name="user" > Edit Details</button>
-						</td>
-					</tr>
-				</table>
-				</div>
+		</div>
         </div>
       </div>
     </main><br/><br/>

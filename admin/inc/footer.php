@@ -4,7 +4,7 @@
 			<div class="col-12" id="footer2">
 				<hr class="featurette-divider">
 				<p class="mb-3 text-center text-muted h4 font-weight-normal">
-		        <strong> &copy; 2021 Nile University of Nigeria</strong>
+		        		<strong> &copy; 2021 Nile University of Nigeria</strong>
 				</p>
 			</div>
 		</div>

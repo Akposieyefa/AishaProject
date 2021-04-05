@@ -1,8 +1,8 @@
 <?php
-    include_once('../phpFolder/updateValidation.php');
-    include_once("../phpFolder/selectClass.php");
-    $complain = new  SelectDetails();
-    $student = $complain->allComplain();
+   // include_once('../phpFolder/updateValidation.php');
+   include_once('../libs/classes/Orphanage.php');
+    $complain = new  Complain();
+    $student = $complain->index();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,10 +11,10 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 		<meta name="description" content="" />
 		<meta name="author" content="" />
-		<title> Class Complains</title>
-		<link href="../bootstrapFolder/dist/css/bootstrap.min.css" rel="stylesheet" />
-		 <link href="../cssFolder/dashboard.css" rel="stylesheet" />
-		<link href="../fonts/css/font-awesome.min.css" rel="stylesheet" />
+		<title> Complains</title>
+		<link href="../layouts/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+		<link href="../layouts/fonts/css/font-awesome.min.css" rel="stylesheet" />
+		<link href="../layouts/css/dashboard.css" rel="stylesheet" />
 		<?php
             session_start();
             $url = "../admin.php";
@@ -98,9 +98,9 @@
 			</div>
 	</div>
 	</div>
-	<?php include_once("footer.php"); ?>
-	<script src="../jqueryFolder/jquery.js" type="text/javascript"></script>
-	<script src="../bootstrapFolder/dist/js/bootstrap.bundle.min.js" type="text/javascript"></script>
-	<script src="../bootstrapFolder/dist/assets/js/vendor/popper.min.js"></script>
-	<script src="../bootsrapFolder/js/bootstrap.min.js"></script></body>
+	<?php include_once("inc/footer.php"); ?>
+    <script src="../layouts/jquery/jquery.js" type="text/javascript"></script>
+    <script src="../layouts/bootstrap/dist/js/bootstrap.bundle.min.js" type="text/javascript"></script>
+    <script src="../layouts/bootstrap/dist/assets/js/vendor/popper.min.js"></script>
+    <script src="../layouts/bootsrap/js/bootstrap.min.js"></script>
 </html>
