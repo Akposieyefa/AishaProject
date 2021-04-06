@@ -54,7 +54,7 @@
         <main role="main" class="px-4 pt-3 col-md-9 ml-sm-auto col-lg-10">
           <div class="flex-wrap pb-2 mb-3 d-flex justify-content-between flex-md-nowrap align-items-center border-bottom">
 		<article class="col-md-6 offset-md-3">
-                     <a href="../layouts/img/nacoss.jpg">
+                     <a href="../layouts/img/logo.jpg">
                             <img class="mx-auto mb-4 rounded-circle d-block " src="../layouts/img/nacoss.jpg" alt="../layouts/img/nacoss.jpg" width="75px" height="75px" id="loginLog">
                      </a>
                      <?php if (isset($error)) { ?>

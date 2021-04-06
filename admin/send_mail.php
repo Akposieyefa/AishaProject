@@ -25,7 +25,7 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-6 offset-md-3">
-				<a href="../layouts/img/nacoss.jpg">
+				<a href="../layouts/img/logo.jpg">
 					<img class="mx-auto mb-4 rounded-circle d-block " src="../layouts/img/nacoss.jpg" alt="../layouts/img/nacoss.jpg" width="75px" height="75px" id="loginLog">
 				</a>
 

@@ -21,7 +21,7 @@
 	</head>
   <body>
 	<?php
-        include_once("inc/nav.php"); 
+        include_once("inc/nav.php");
     ?><br/><br/><br/> <br/><br/><br/>
     <main role="main">
         <div class="container">
