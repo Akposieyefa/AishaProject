@@ -1,3 +1,4 @@
+<?php include_once('../libs/ChildValidation.php'); ?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -29,7 +30,7 @@
         <div class="col-md-7 offset-md-3 col-sm-12">
 					
           <a href="imagesFolder/twetter.jpg">
-              <img class="rounded-circle mx-auto d-block mb-4 " src="../layouts/img/logo.jpg" alt="../layouts/img/logo.jpg" width="75px" height="75px" id="loginLog">
+              <img class="mx-auto mb-4 rounded-circle d-block " src="../layouts/img/logo.jpg" alt="../layouts/img/logo.jpg" width="75px" height="75px" id="loginLog">
           </a>
 	<h3 class="text-center"><em>Orphanage Profile</em></h3>
        <?php if (isset($error)) { ?>
@@ -38,22 +39,27 @@
                      <?php if (isset($success)) { ?>
                             <div class="alert alert-success"><?php echo "$success" ?></div>
                      <?php	} ?>
-                     <form method="post" action="">
+                     <form method="post" action="" enctype="multipart/form-data">
                             <div class="form-group">
                                    <label for="haddress"><strong>Name</strong></label>
                                    <input type="text" name="name" id="name" class="form-control input-sm" placeholder="Orphanage Name">
                             </div>
                             <div class="form-group">
                                    <label for="haddress"><strong>DOB</strong></label>
-                                   <input type="date" name="email" id="email" class="form-control input-sm" placeholder="Email Address">
+                                   <input type="date" name="dob" id="dob" class="form-control input-sm" placeholder="Email Address">
                             </div>
                             <div class="form-group">
-                                   <label for="haddress"><strong>Gender</strong></label>
-                                   <input type="date" name="email" id="email" class="form-control input-sm" placeholder="Email Address">
+                                   <label for="haddress"><strong>Gender</strong></label><br>
+                                   <input type="radio" id="male" name="gender" value="male">
+                                   <label for="male">Male</label>&nbsp &nbsp &nbsp
+                                   <input type="radio" id="female" name="gender" value="female">
+                                   <label for="female">Female</label> &nbsp &nbsp &nbsp
+                                   <input type="radio" id="other" name="gender" value="other">
+                                   <label for="other">Other</label>
                             </div>
                             <div class="form-group">
                                    <label for="haddress"><strong>Image</strong></label>
-                                   <input type="file" name="phone" id="phone" class="form-control input-sm" placeholder="Phone Number">
+                                   <input type="file" name="uploadfile" id="uploadfile" class="form-control input-sm" value="uploadfile">
                             </div>
                             <br/>
                             
