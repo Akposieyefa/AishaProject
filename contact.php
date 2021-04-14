@@ -15,7 +15,7 @@
 								<span class="adrs"> </span>
 							</div>
 							<div class="c-right">
-								<h5>The Company Name agi,<span>756 gt globel Place.</span></h5>
+								<h5>Nile University of Nigeria</span></h5>
 							</div>
 							<div class="clearfix"></div>
 						</div>
@@ -24,8 +24,7 @@
 								<span class="ph"> </span>
 							</div>
 							<div class="c-right">
-							<p>Telephone: +1 234 567 9871
-								<span>FAX: +1 234 567 9871</span>
+							<p>Telephone: 08142182473
 							</p>
 							</div>
 							<div class="clearfix"></div>
@@ -35,7 +34,7 @@
 								<span class="mail"> </span>
 							</div>
 							<div class="c-right">
-								<p><a href="mailto:example@email.com">mail@user.com</a></p>
+								<p><a href="#">aishakabiru@gmail.com</a></p>
 							</div>
 							<div class="clearfix"></div>
 						</div>

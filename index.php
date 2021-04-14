@@ -98,7 +98,7 @@
 					<div class="col-md-6 mission-left">
 						<h3>Our mission</h3>
 						<div class="col-md-6 mission-one">
-							<img src="images/mission-1.jpg" alt="">
+							<img src="images/mission-2.jpg" alt="">
 							<div class="m-btn">
 								<a href="#">More info</a>
 							</div>
