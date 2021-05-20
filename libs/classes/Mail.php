@@ -2,7 +2,11 @@
 
 class Mail 
 {
-       public function send_mail($ary1,$ary2,$ary3) {
+       function __construct($pdo) {
+		    $this->db = $pdo;
+		}
+
+  public function send_mail($email,$subject,$name,$text) {
 		require_once("PHPMailer/PHPMailerAutoload.php");
 		$mail=new PHPMailer();
 		$mail->CharSet = 'UTF-8';
@@ -23,12 +27,12 @@ class Mail
 
 		$mail->SetFrom("");
 		$mail->AddReplyTo('no-reply@','no-reply');
-		$mail->Subject    = $ary2;
+		$mail->Subject    = $subject;
 
 		$mail->MsgHTML("
-				$ary3
+				$text
 		");
-		$mail->AddAddress($ary1 , $ary3);
+		$mail->AddAddress($email , $name);
 		if (!$mail->send()) {$msg= "Mailer Error: " . $mail->ErrorInfo;
 		}
 	}
