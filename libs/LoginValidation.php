@@ -1,38 +1,26 @@
 <?php
+session_start();
+require_once("classes/DB.php");
 include_once("classes/Login.php");
-    $login = new Login();
+    $pdo = new DB();
+    $login = new Login($pdo);
     if (isset($_POST['login'])) {
-        session_start();
-        $url = "admin/dashboard.php";
-        $url_user = "orphanage/dashboard.php";
         $email = $_POST['email'];
         $password = md5($_POST['password']);
 
         if (empty($email) || empty($password)) {
             $error = "No field should be left empty...";
-        } elseif (strlen($email > 30) && strlen($password > 30)) {
-            $error = "Maxlength Value Must be considerd thanks";
-        } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        }elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $error = "Email must be a valid mail";
         } else {
-            $adminLogin = $login->adminLogin($email, $password);
             $orphanageLogin = $login->orphpanageLogin($email, $password);
-            if ($adminLogin) {
-                $make_session = $login->adminDetails($email);
-                foreach ($make_session as $email) {
-                    $_SESSION['admin'] = $email;
-                    if (isset($_SESSION['admin'])) {
-                        header("location:$url");
-                    }
-                }
-            } elseif ($orphanageLogin) {
+            if ($orphanageLogin > 0) {
                 $make_session = $login->orphanageDetails($email);
-                foreach ($make_session as $email) {
-                    $_SESSION['user'] = $email;
-                    if (isset($_SESSION['user'])) {
-                        header("location:$url_user");
+                if ($make_session != NULL) {
+                    $_SESSION['user'] = $make_session;
+                        header("location:orphanage/dashboard.php");
+                        exit;
                     }
-                }
             } else {
                 $error = "User details do not exist";
             }

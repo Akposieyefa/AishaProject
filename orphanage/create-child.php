@@ -1,3 +1,11 @@
+<?php
+    session_start();
+    if(!isset($_SESSION['user']))
+  { 
+  header('location:index.php');
+}else {
+
+?>
 <?php include_once('../libs/ChildValidation.php'); ?>
 <!doctype html>
 <html lang="en">
@@ -10,15 +18,6 @@
 		<link href="../layouts/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
 		<link href="../layouts/fonts/css/font-awesome.min.css" rel="stylesheet" />
 		<link href="../layouts/css/dashboard.css" rel="stylesheet" />
-		<?php
-            session_start();
-            $url = "../login.php";
-            if ($_SESSION['user']) {
-                $_SESSION['user'];
-            } else {
-                header("location:$url");
-            }
-        ?>
 	</head>
   <body>
 	<?php
@@ -32,7 +31,7 @@
           <a href="imagesFolder/twetter.jpg">
               <img class="mx-auto mb-4 rounded-circle d-block " src="../layouts/img/logo.jpg" alt="../layouts/img/logo.jpg" width="75px" height="75px" id="loginLog">
           </a>
-	<h3 class="text-center"><em>Orphanage Profile</em></h3>
+	<h3 class="text-center"><em>Orphan Profile</em></h3>
        <?php if (isset($error)) { ?>
                             <div class="alert alert-danger"><?php echo "$error" ?></div>
                      <?php	} ?>
@@ -42,7 +41,7 @@
                      <form method="post" action="" enctype="multipart/form-data">
                             <div class="form-group">
                                    <label for="haddress"><strong>Name</strong></label>
-                                   <input type="text" name="name" id="name" class="form-control input-sm" placeholder="Orphanage Name">
+                                   <input type="text" name="name" id="name" class="form-control input-sm" placeholder="Orphan Name">
                             </div>
                             <div class="form-group">
                                    <label for="haddress"><strong>DOB</strong></label>
@@ -50,12 +49,11 @@
                             </div>
                             <div class="form-group">
                                    <label for="haddress"><strong>Gender</strong></label><br>
-                                   <input type="radio" id="male" name="gender" value="male">
-                                   <label for="male">Male</label>&nbsp &nbsp &nbsp
-                                   <input type="radio" id="female" name="gender" value="female">
-                                   <label for="female">Female</label> &nbsp &nbsp &nbsp
-                                   <input type="radio" id="other" name="gender" value="other">
-                                   <label for="other">Other</label>
+                                   <select name="gender">
+                                     <option value="male"> Male</option>
+                                     <option value="female"> Female</option>
+                                     <option value="other"> Other</option>
+                                   </select>
                             </div>
                             <div class="form-group">
                                    <label for="haddress"><strong>Image</strong></label>
@@ -78,3 +76,4 @@
     <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
   </body>
 </html>
+<?php } ?>

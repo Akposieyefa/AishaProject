@@ -1,7 +1,9 @@
 <?php
+	include_once("./libs/classes/DB.php");
     include_once('./libs/classes/Children.php');
-    $home = new Children();
-    $homes = $home->index();
+    $pdo = new DB();
+    $home = new Children($pdo);
+    $homes = $home->orphans();
 ?>
 <?php include_once('inc/nav.php');?>
 	<!--Header-Ends-Here-->
@@ -13,24 +15,19 @@
 				<p>Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore </p>
 			</div>
 			<div class="products-bottom">
-			<?php foreach ($homes as $home): ?>
+			<?php foreach ($homes as $res){
+				?>
 				<div class="col-md-4">
-					<div class="view view-tenth">
-					      <a href="single.html">
-						   <div class="clearfix inner_content">
-							<div class="product_image">
-								<img src="orphanage/image/<?php echo $home['picture'];?>" class="img-responsive of-my" alt=""/>
-								<div class="mask" >
-			                        <h4><?php echo $home['name'];?></h4>
-			                        <p><strong>DOB : </strong><?php echo $home['dob'];?></p>
-			                    </div>
-			                  	</div>
-			                 </div>
-				            </a> 
-				       </div>
+					<div class="card" style="width: 18rem;">
+					  <img src="orphanage/image/<?php echo $res->picture;?>" class="card-img-top" alt="..." height="64px" width="64px">
+					  <div class="card-body">
+					    <h5 class="card-title"><?php echo $res->name;?></h5>
+					    <p class="card-text"><?php echo $res->dob;?>.</p>
+					    <a href="detail.php?childid=<?php echo $res->id;?>&homeid=<?php echo $res->orphanage_id;?>" class="btn btn-primary">Sponsor</a>
+					  </div>
+					</div>
 				</div>  
-
-			<?php endforeach?>
+			<?php }?>
 					  
 		
 					

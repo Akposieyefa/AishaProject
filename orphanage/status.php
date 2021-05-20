@@ -1,11 +1,10 @@
 <?php
 	session_start();
-	$url = "../login.php";
-	if ($_SESSION['user']) {
-	$_SESSION['user'];
-	}else{
-		header("location:$url");
-	}
+    if(!isset($_SESSION['user']))
+  { 
+  header('location:index.php');
+}else{
+
 ?>
 <?php
 	include_once('../phpFolder/updateValidation.php');
@@ -121,6 +120,8 @@
 	</body>
 </html>
 <?php
+}
+
 }else{
 	echo "
 				<script>

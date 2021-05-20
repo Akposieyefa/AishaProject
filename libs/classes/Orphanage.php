@@ -1,24 +1,18 @@
 <?php
-include_once("DB.php");
-
 class Orphanage
 {
-    public $link;
+     function __construct($pdo)
+      {
+          $this->pdo = $pdo;
+      }
 
-    public function __construct()
+    public function index($args)
     {
-        $database = new DB();
-        $this->link = $database->dbConnect();
-    }
-
-    public function index()
-    {
-        $stmt = $this->link->prepare("SELECT * FROM orphanage");
-        $stmt->execute();
-        return $stmt->fetchAll();
+        $stmt = $this->pdo->preparedStatement("SELECT * FROM orphanage WHERE id=?", $args);
+        return $stmt->fetch();
     }//end
 
-    public function create($name,$email,$phone,$address,$password,$date) {
+    /*public function create($name,$email,$phone,$address,$password,$date) {
 
        $stmt = $this->link->prepare("INSERT INTO orphanage(name,email,phone,address,password,created_at) VALUES(?,?,?,?,?,?)");
        $stmt->bindParam(1, $name);
@@ -30,5 +24,5 @@ class Orphanage
        $stmt->execute();
        $count = $stmt->rowCount();
        return $count;
-   }//end
+   }*///end
 }

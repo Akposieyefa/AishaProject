@@ -1,36 +1,22 @@
 <?php
-    include_once('classes/Orphanage.php');
+    include_once('classes/DB.php');
     include_once('classes/Mail.php');
-    $mail = new Mail();
-    $home = new Orphanage();
-    $homes = $home->index();
+    $pdo = new DB();
+    $mail = new Mail($pdo);
 
-if (isset($_POST['send'])) {
-    $subject = $_POST['subject'];
-    $message = $_POST['message'];
-    if (empty($subject) || empty($message)) {
+if (isset($_POST['email'])) {
+    $send = $mail->send_mail($email,$subject,$name,$amount);
+    if ($send) {
         echo "
-              <script>
-                     alert('No field must be empty');
-              </script>
-	";
+             <script>
+                    alert('Email sent');
+             </script>
+      ";
     } else {
-        foreach ($homes as $home) {
-            $email = $homet['email'];
-            $send = $mail->send_mail($email, $subject, $message);
-            if ($send) {
-                echo "
-                     <script>
-                            alert('Email sent');
-                     </script>
-              ";
-            } else {
-                echo "
-                     <script>
-                            alert('Error');
-                     </script>
-              ";
-            }
-        }
+        echo "
+             <script>
+                    alert('Error');
+             </script>
+      ";
     }
 }

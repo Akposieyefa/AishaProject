@@ -1,4 +1,12 @@
-<!doctype html>
+<?php
+    session_start();
+    if(!isset($_SESSION['user']))
+	{	
+	header('location:index.php');
+}else {
+
+?>
+<!DOCTYPE html>
 <html lang="en">
   <head>
 		<meta charset="utf-8" />
@@ -9,15 +17,7 @@
 		<link href="../layouts/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
 		<link href="../layouts/fonts/css/font-awesome.min.css" rel="stylesheet" />
 		<link href="../layouts/css/dashboard.css" rel="stylesheet" />
-		<?php
-            session_start();
-            $url = "../login.php";
-            if ($_SESSION['user']) {
-                $_SESSION['user'];
-            } else {
-                header("location:$url");
-            }
-        ?>
+		
 	</head>
   <body>
 	<?php
@@ -38,7 +38,7 @@
 							<p>	<strong> Name :</strong></p>
 						</td>
 						<td>
-							<?php echo($_SESSION['user'][1]);?>
+							<?php echo($_SESSION['user']->name);?>
 						</td>
 					</tr>
           <tr>
@@ -46,7 +46,7 @@
 							<p>	<strong> Email:</strong></p>
 						</td>
 						<td>
-							<?php echo($_SESSION['user'][2]);?>
+							<?php echo($_SESSION['user']->email);?>
 						</td>
 					</tr>
 					<tr>
@@ -54,7 +54,7 @@
 							<p>	<strong> Phone :</strong></p>
 						</td>
 						<td>
-						<?php echo strtoupper(($_SESSION['user'][3]));?>
+						<?php echo strtoupper(($_SESSION['user']->phone));?>
 						</td>
 					</tr>
 					<tr>
@@ -62,15 +62,15 @@
 							<p>	<strong>Address : </strong></p>
 						</td>
 						<td>
-						<?php echo strtolower(($_SESSION['user'][4]));?>
+						<?php echo strtolower(($_SESSION['user']->address));?>
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<p>	<strong>Date: </strong></p>
+							<p>	<strong>Reg Date: </strong></p>
 						</td>
 						<td>
-						<?php echo strtolower(($_SESSION['user'][6]));?>
+						<?php echo strtolower(($_SESSION['user']->created_at));?>
 						</td>
 					</tr>
 					<tr>
@@ -98,3 +98,5 @@
     <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
   </body>
 </html>
+<?php
+} ?>

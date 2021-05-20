@@ -1,33 +1,39 @@
 <?php 
-include_once("DB.php");
-
 class Children
 {
-       public $link;
-
-       public function __construct()
-       {
-           $database = new DB();
-           $this->link = $database->dbConnect();
-       }
+      function __construct($pdo)
+      {
+          $this->pdo = $pdo;
+      }
    
-       public function index()
+       public function index($args)
        {
-           $stmt = $this->link->prepare("SELECT * FROM orphans");
-           $stmt->execute();
-           return $stmt->fetchAll();
+           return $this->pdo->preparedStatement("SELECT * FROM orphans WHERE orphanage_id=?", $args)->fetchAll();
+       }//end
+
+       public function orphans()
+       {
+           return $this->pdo->preparedStatement("SELECT * FROM orphans")->fetchAll();
+       }//end
+
+       public function orphan($args)
+       {
+           return $this->pdo->preparedStatement("SELECT * FROM orphans WHERE id=?", $args)->fetchAll();
        }//end
    
-       public function create($name,$dob,$gender,$picture,$date) {
+       public function create($args) {
    
-          $stmt = $this->link->prepare("INSERT INTO orphans(name,dob,gender,picture,created_at) VALUES(?,?,?,?,?)");
-          $stmt->bindParam(1, $name);
-          $stmt->bindParam(2, $dob);
-          $stmt->bindParam(3, $gender);
-          $stmt->bindParam(4, $picture);
-          $stmt->bindParam(5, $date);
-          $stmt->execute();
+          $stmt = $this->pdo->preparedStatement("INSERT INTO orphans (orphanage_id,name,dob,gender,picture) VALUES (?,?,?,?,?)", $args);
           $count = $stmt->rowCount();
           return $count;
-      }//end   
+      }//end 
+
+      public function delete($args) {
+        $stmt = $this->pdo->preparedStatement("DELETE FROM orphans WHERE id=?", $args)->rowCount();
+        return $stmt;
+      } //end
+
+      public function update($args) {
+        return $this->pdo->preparedStatement("UPDATE orphans SET name=?, dob=?, gender=?, picture=? WHERE id=?", $args);
+      }
 }

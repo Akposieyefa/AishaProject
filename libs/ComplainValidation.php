@@ -1,6 +1,8 @@
 <?php
+    include_once("classes/DB.php");
     include_once("classes/Complain.php");
-    $complain = new Complain();
+    $pdo = new DB();
+    $complain = new Complain($pdo);
     
     if (isset($_POST['complain'])) {
         $date	 = date('Y:m:d');
@@ -17,7 +19,7 @@
         } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $error = 'Email must be valid...';
         } else {
-            $send = $complian->create($caseID, $orphange_id, $subject, $email, $info, $date);
+            $send = $complian->create($caseID, $orphange_id, $subject, $email, $info);
             if ($create == 1) {
                 $success = "Complain made successfully check your mail";
             } else {

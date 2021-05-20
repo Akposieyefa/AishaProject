@@ -1,3 +1,11 @@
+<?php
+    session_start();
+    if(!isset($_SESSION['user']))
+	{	
+	header('location:index.php');
+}else {
+
+?>
 <?php include_once('../libs/ComplainValidation.php'); ?>
 <!doctype html>
 <html lang="en">
@@ -10,15 +18,6 @@
 		<link href="../layouts/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
 		<link href="../layouts/fonts/css/font-awesome.min.css" rel="stylesheet" />
 		<link href="../layouts/css/dashboard.css" rel="stylesheet" />
-		<?php
-            session_start();
-            $url = "../login.php";
-            if ($_SESSION['user']) {
-                $_SESSION['user'];
-            } else {
-                header("location:$url");
-            }
-        ?>
 	</head>
   <body>
 	<?php
@@ -36,7 +35,7 @@
             <?php if (isset($success)) {  ?>
                  <div class="alert alert-success"><?php echo "$success" ?></div>
             <?php  }    ?>
-              <form class="needs-validation" novalidate action="" method="POST">
+             <form class="needs-validation" novalidate action="" method="POST">
 			<input type="hidden" class="form-control" name="orphange_id" value="<?php echo 	$_SESSION['user'][0];?>" required />
                     <div class="mb-3">
                         <label for="address"><strong>Subject</strong></label>
@@ -87,3 +86,5 @@
 			</script>
 	</body>
 </html>
+<?php
+} ?>

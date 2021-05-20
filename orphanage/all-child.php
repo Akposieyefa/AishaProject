@@ -1,7 +1,26 @@
+
 <?php
-    include_once('../libs/classes/Children.php');
-    $home = new Children();
-    $homes = $home->index();
+    session_start();
+    if(!isset($_SESSION['user']))
+  { 
+  header('location:index.php');
+}else {
+
+include_once("../libs/classes/DB.php");
+include_once('../libs/classes/Children.php');
+ $pdo = new DB();
+$home = new Children($pdo);
+$homes = $home->index([$_SESSION['user']->id]);
+    
+if(isset($_REQUEST['deleteid']))
+  {
+$id=$_GET['deleteid'];
+$homes->delete($id);
+$query = $dbh->prepare($sql);
+$success="Page data updated  successfully";
+
+}
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -14,15 +33,6 @@
 		<link href="../layouts/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
 		<link href="../layouts/fonts/css/font-awesome.min.css" rel="stylesheet" />
 		<link href="../layouts/css/dashboard.css" rel="stylesheet" />
-		<?php
-            session_start();
-            $url = "../login.php";
-            if ($_SESSION['user']) {
-                $_SESSION['user'];
-            } else {
-                header("location:$url");
-            }
-        ?>
 	</head>
   <body>
 	<?php
@@ -34,7 +44,13 @@
                             <a href="imagesFolder/twetter.jpg">
                                    <img class="mx-auto mb-4 rounded-circle d-block " src="../layouts/img/logo.jpg" alt="../layouts/img/logo.jpg" width="75px" height="75px" id="loginLog">
                             </a>
-                            <h3 class="text-center"><em>Orphanage Profile</em></h3>
+                      <?php if (isset($error)) { ?>
+                            <div class="alert alert-danger"><?php echo "$error" ?></div>
+                     <?php  } ?>
+                     <?php if (isset($success)) { ?>
+                            <div class="alert alert-success"><?php echo "$success" ?></div>
+                     <?php  } ?>
+                            <h3 class="text-center"><em>Orphan Profile</em></h3>
                             <div class="table-responsive">
 					<table class="table table-striped table-lg table-border">
 						<thead>
@@ -49,23 +65,26 @@
 						</thead>    
                                           <?php $i = 1; ?>  
 						<tbody>
-                                                 <?php foreach ($homes as $home): ?>
+                                                 <?php 
+                                                
+                                                 foreach($homes as $res){ ?>
+
                                                         <tr>
                                                                <td><span style="background-color:#ff00bb;" class="badge" ><?php echo $i++; ?></span></td>
-                                                               <td><?php echo $home['name']; ?></td>
-                                                               <td><?php echo $home['dob']; ?></td>
-                                                               <td><?php echo $home['gender']; ?></td>
-                                                               <td><?php echo $home['created_at']; ?></td>
+                                                               <td><img src="image/<?php echo $res->picture; ?>" alt="image/<?php echo $res->picture; ?>" height="80px" width="80px"><?php echo $res->name; ?></td>
+                                                               <td><?php echo $res->dob; ?></td>
+                                                               <td><?php echo $res->gender; ?></td>
+                                                               <td><?php echo $res->created_at; ?></td>
                                                                <td>
-                                                                      <form action="" method="post">
-                                                                             <input type="hidden" name="messageID" value="<?php echo $home['id']; ?>">
-                                                                             <span>
-                                                                                    <button class="btn btn-danger" name="delete"> <i  class="fa fa-trash"></i> Delete</button>
-                                                                             </span>
-                                                                      </form>
+                                                                   <span>
+                                                                    <a href="all-child.php?deleteid=<?php echo htmlentities($res->id);?>" onclick="return confirm('Do you really want to Delete this?')" class="btn btn-danger"><i  class="fa fa-trash"></i> Delete Orphange</a>
+                                                                   </span>
+                                                                   <span>
+                                                                    <a href="update-child.php?orphanid=<?php echo htmlentities($res->id);?>" class="btn btn-info"><i  class="fa fa-trash"></i> Update Data</a>
+                                                                   </span>
                                                                </td>
                                                         </tr>
-                                                 <?php endforeach?>
+                                                 <?php } ?>
                                           </tbody>
 				</table>
 				</div>
@@ -82,3 +101,4 @@
     <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
   </body>
 </html>
+<?php } ?>

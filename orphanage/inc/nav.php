@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
      <div class="container">
-          <a class="navbar-brand bg-dark" href="#"> 	<?php echo  $_SESSION['user'][2]; ?> </a>
+          <a class="navbar-brand bg-dark" href="#"> 	<?php echo  $_SESSION['user']->name; ?> </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -19,7 +19,7 @@
                <a href="all-child.php" class="nav-link"> All Children</a>
               </li>
               <li class="nav-item">
-               <a class="nav-link" href="destroy.php"> Sign Out</a>
+               <a class="nav-link" href="logout.php"> Sign Out</a>
               </li>
             </ul>
           </div>

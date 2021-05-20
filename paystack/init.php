@@ -1,7 +1,6 @@
 <?php
 session_start();
 include('../includes/config.php');
-//error_reporting(0);
 
 function getPaymentKeys()
 {
@@ -13,26 +12,16 @@ function getPaymentKeys()
   }
 }
 
-  // Function get users Ip Address
-function getIp() {
-  $ip = $_SERVER['REMOTE_ADDR'];
-
-  if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-      $ip = $_SERVER['HTTP_CLIENT_IP'];
-  } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-      $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-  }
-  
-  return  ip2long($ip);
-}
 
 $curl = curl_init();
 $paymentSecretKey = getPaymentKeys()->PaymentSecretKey;
 $orphanId = $_POST['orphanId'];
-$email = $_POST['userEmail'];
+$orphanageId = $_POST['orphanageId'];
+$email = $_POST['email'];
+$name = $_POST['name'];
+$address = $_POST['address']; 
+$phone = $_POST['phone']; 
 $amount = $_POST['amount']; 
-$message = $_POST['message']; 
-$trx = mt_rand(100000000, 999999999);
 $callback_url = 'paystack/callback.php'; 
 
 curl_setopt_array($curl, array(
@@ -66,12 +55,13 @@ if(!$tranx['status']){
   print_r('API returned error: ' . $tranx['message']);
 }
 
-$IP_ADDRESS = getIP();
 $access_code = $tranx['data']['access_code']; 
 $reference = $tranx['data']['reference'];
 $destination = $tranx['data']['authorization_url'];
 
-$sql = $dbh ->query("INSERT INTO `payments` (`userEmail`, `OrphanID`, `IP_ADDRESS`, `access_code`, `paymentReference`, `TXN_ID`, `AMOUNT_TO_PAY`, `DESTINATION`, `STATUS`, `message`) VALUES ('$email', '$OrphanId', '$IP_ADDRESS', '$access_code', '$reference', '$trx', '$amount', '$destination', 'initialize', '$message')");
+$sql = $dbh ->query("INSERT INTO `tbl_donations` (`orphan_id`, `orphanage_id`, `donor_name`, `donor_email`, `donor_phone`, `amount`) VALUES ('$orphanId', '$orphanageId', '$name', '$email', '$phone', '$amount')");
+
+include_once("../libs/SendMailValidation.php");
  
   //Database insert initializing
 print_r($tranx);
